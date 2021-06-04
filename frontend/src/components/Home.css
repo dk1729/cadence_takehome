@@ -1,0 +1,32 @@
+.container{
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+}
+
+.header{
+    /*border: 1px solid black;*/
+    min-height: 4rem;
+    padding-top: 2rem;
+    padding-left: 2rem;
+}
+
+.table{
+    /*border: 1px solid black;*/
+    padding: 2rem;
+}
+
+.no_data{
+    margin-top: 1rem;
+    color: red;
+    margin-bottom: -1.5rem;
+}
+
+.paginator{
+    margin-left: 45%;
+    margin-top: 1rem;
+}
+
+.modal_input{
+    margin-bottom: 1%;
+}
