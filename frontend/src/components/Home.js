@@ -93,6 +93,7 @@ const Home = () => {
   });
   const { column, data, current, direction, selected_option, search_term, open} = state;
 
+  //Fetch all data from backend
   const fetch_data = () => {
     axios.get(`${BACKEND}/get_data`)
       .then(response=>{
@@ -102,14 +103,18 @@ const Home = () => {
         console.log(err);
       })
   };
+
+  //Initial effect to load all data
   useEffect(() => {
     fetch_data();
   }, []);
 
+  //Effect for pagination to set current page size
   useEffect(() => {
     dispatch({type: 'SET_CURRENT', new_current: data.slice(0,20)});
   }, [data]);
 
+  //Function to change the page
   const selectPage = (e, pageInfo) => {
     console.log(pageInfo.activePage)
     let startIdx;
@@ -121,10 +126,12 @@ const Home = () => {
     dispatch({type: 'SET_CURRENT', new_current: data.slice(startIdx, endIdx)});
   }
 
+  //Handle change in Dropdown menu's value
   const handle_change = (e, {value}) => {
     dispatch({type: 'SET_SELECTED_COLUMN', selected_option: value});
   }
 
+  //Handle change in search bar at the top
   const handle_search_input = (e, {value}) => {
     if(!value.includes("'") && !value.includes("\"") && !value.includes("`"))
       dispatch({type: 'SET_SEARCH_TERM', search_term: value});
@@ -133,6 +140,7 @@ const Home = () => {
     }
   }
 
+  //Submit the results of Dropdown menu and search bar
   const handle_submit = async (e, {value}) => {
     console.log(search_term, selected_option)
     try{
@@ -150,6 +158,7 @@ const Home = () => {
     }
   }
 
+  //Handle submission of Add Data Form
   const submit_form = async (e) => {
     dispatch({ type: 'TOGGLE_MODAL', open: false})
     let new_data = {
@@ -197,6 +206,7 @@ const Home = () => {
     }
   }
 
+  //Reset the search bar and display original results
   const reset = () => {
     dispatch({type: 'SET_SEARCH_TERM', search_term: ""});
     fetch_data();
