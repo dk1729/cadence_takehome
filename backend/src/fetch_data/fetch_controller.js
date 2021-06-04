@@ -1,10 +1,13 @@
-var connection = require('../config')
+const config = require('../config')
+const connection = config.connection;
 const util = require('util');
 const query = util.promisify(connection.query).bind(connection);
+const db_name = config.db_name;
+const table_name = config.table_name;
 
 exports.fetch_initial_data = async (req, res) => {
   try{
-    let the_query = "SELECT * from `cadence`.`example`";
+    let the_query = "SELECT * from `"+db_name+"`.`"+table_name+"`";
     let rows = await query(the_query);
     res.writeHead(200, {
       "Content-Type" : "application/json"

@@ -30,4 +30,5 @@ def build_table(file_path, username, password, hostname, db_name, table_name, pr
     except:
         return "Some error occured"
 
+#Change the values accordingly
 build_table('takehome.csv', 'root', 'root', 'localhost', 'cadence', 'example2', 'Order ID')

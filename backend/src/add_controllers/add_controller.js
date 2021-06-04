@@ -1,10 +1,14 @@
-const connection = require('../config')
+const config = require('../config')
+const connection = config.connection;
 const util = require('util');
 const query = util.promisify(connection.query).bind(connection);
 const mysql = require('mysql2');
+const db_name = config.db_name;
+const table_name = config.table_name;
+
 exports.add_column = async (req, res) => {
   try{
-    let the_query = "INSERT INTO `cadence`.`example` SET"+mysql.escape(req.body);
+    let the_query = "INSERT INTO `"+db_name+"`.`"+table_name+"` SET"+mysql.escape(req.body);
     await query(the_query);
     res.writeHead(200, {
       "Content-Type" : "text/plain"

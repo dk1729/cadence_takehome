@@ -1,9 +1,14 @@
-var mysql = require('mysql2');
+const mysql = require('mysql2');
 
-var connection = mysql.createPool({
+const connection = mysql.createPool({
   host: "localhost",
   user: "root",
   password: "root"
 });
 
-module.exports = connection;
+const db_name = "cadence"
+const table_name = "example"
+
+exports.db_name = db_name;
+exports.table_name = table_name;
+exports.connection = connection;
