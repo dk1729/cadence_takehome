@@ -6,6 +6,7 @@ const db_name = config.db_name;
 const table_name = config.table_name;
 
 exports.search = async (req, res) => {
+  console.log(req.query)
   try{
     let search_term = req.query.search_term;
     let selected_option = req.query.selected_option;
@@ -23,6 +24,7 @@ exports.search = async (req, res) => {
     }
     else{
       let the_query = "SELECT * FROM `"+db_name+"`.`"+table_name+"` WHERE `"+selected_option+"` LIKE '%"+search_term+"%';";
+      console.log(the_query)
       let rows = await query(the_query);
       res.writeHead(200, {
         "Content-Type" : "application/json"

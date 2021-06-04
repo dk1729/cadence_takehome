@@ -116,7 +116,6 @@ const Home = () => {
 
   //Function to change the page
   const selectPage = (e, pageInfo) => {
-    console.log(pageInfo.activePage)
     let startIdx;
     let endIdx;
 
@@ -142,10 +141,8 @@ const Home = () => {
 
   //Submit the results of Dropdown menu and search bar
   const handle_submit = async (e, {value}) => {
-    console.log(search_term, selected_option)
     try{
       const response = await axios.get(`${BACKEND}/search`, {params:{search_term, selected_option}})
-      console.log(response)
       if(response.status === 200){
         dispatch({ type: 'FILL', new_data: response.data})
       }
